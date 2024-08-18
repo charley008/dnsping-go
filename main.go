@@ -4,23 +4,26 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"math"
 	"net"
-        "math"
 	"os"
 	"strings"
 	"time"
 )
 
+const version = "1.0.0"
+
 func usage() {
 	fmt.Println("DNS Query and TCPing Tool")
 	fmt.Println("\nUsage:")
-	fmt.Println("  dnstool -d <domain> -s <dns_servers> [-t <query_type>]")
+	fmt.Println("  dnsping-go -d <domain> -s <dns_servers> [-t <query_type>] [-v]")
 	fmt.Println("\nParameters:")
 	fmt.Println("  -d  Domain to query (required)")
 	fmt.Println("  -s  Comma-separated list of DNS servers (required)")
 	fmt.Println("  -t  Query type: 4 for A (IPv4), 6 for AAAA (IPv6) (default: 4)")
+	fmt.Println("  -v  Show version information")
 	fmt.Println("\nExample:")
-	fmt.Println("  dnstool -d www.example.com -s 1.1.1.1,8.8.8.8,223.5.5.5 -t 4")
+	fmt.Println("  dnsping-go  -d www.example.com -s 1.1.1.1,8.8.8.8,223.5.5.5 -t 4")
 	fmt.Println("\nDescription:")
 	fmt.Println("  This tool performs DNS queries for a specified domain using the provided DNS servers.")
 	fmt.Println("  It then conducts a TCPing test to the resolved IP address on port 80.")
@@ -28,6 +31,12 @@ func usage() {
 }
 
 func main() {
+	for _, arg := range os.Args[1:] {
+		if arg == "-v" {
+			fmt.Println("Version:", version)
+			os.Exit(0)
+		}
+	}
 	domain := flag.String("d", "", "Domain to query")
 	servers := flag.String("s", "", "Comma-separated list of DNS servers")
 	queryType := flag.String("t", "4", "Query type: 4 for A, 6 for AAAA")
