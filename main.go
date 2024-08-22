@@ -20,7 +20,7 @@ func usage() {
 	fmt.Println("\nParameters:")
 	fmt.Println("  -d  Domain to query (required)")
 	fmt.Println("  -s  Comma-separated list of DNS servers (required)")
-	fmt.Println("  -t  Query type: 4 for A (IPv4), 6 for AAAA (IPv6) (default: 4)")
+	fmt.Println("  -t  Query type: 4 for A (IPv4), 6 for AAAA (IPv6) (default: 4),NS/CNAME/SOA/MX/SRV")
 	fmt.Println("  -v  Show version information")
 	fmt.Println("\nExample:")
 	fmt.Println("  dnsping-go  -d www.example.com -s 1.1.1.1,8.8.8.8,223.5.5.5 -t 4")
